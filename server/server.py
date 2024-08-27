@@ -1,25 +1,31 @@
 import asyncio
 import websockets
-import os
+import numpy as np
+import cv2
+import io
 
 async def video_stream_handler(websocket, path):
-    count = 0
-    os.makedirs("received_frames", exist_ok=True)
-    
-    try:
-        while True:
+    while True:
+        try:
             frame_data = await websocket.recv()
-            with open(f"received_frames/frame_{count}.jpg", "wb") as f:
-                f.write(frame_data)
-            count += 1
-            print(f"Received frame {count}")
-    except websockets.exceptions.ConnectionClosedOK:
-        print("Connection closed gracefully.")
-    except websockets.exceptions.ConnectionClosedError as e:
-        print(f"Connection closed with error: {e}")
-    except Exception as e:
-        readable_exception = e.__class__.__name__ + ": " + str(e)
-        print(f"Unexpected error: {readable_exception}")
+            # Convert bytes data to a numpy array
+            np_arr = np.frombuffer(frame_data, np.uint8)
+            # Decode numpy array to an image
+            image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+            if image is not None:
+                # Display the image using OpenCV
+                cv2.imshow("Video Stream", image)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+            else:
+                print("Failed to decode image")
+        except websockets.exceptions.ConnectionClosed:
+            print("Connection closed")
+            break
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+
+    cv2.destroyAllWindows()
 
 start_server = websockets.serve(video_stream_handler, "localhost", 8765)
 

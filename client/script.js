@@ -36,7 +36,7 @@ function startStreaming(stream) {
             } catch (error) {
                 console.error('Error capturing frame:', error);
             }
-        }, 5000); // Sending frames every 100 ms
+        }, 100); // Sending frames every 100 ms
     };
 
     socket.onclose = (event) => {
