@@ -91,6 +91,7 @@ class Ros2Socket(Node):
             async for message in websocket:
                 msg: Image = Image()
                 msg.data = message
+                msg.header.stamp = self.get_clock().now().to_msg() # TODO: timestamping from the client side
                 self.pub.publish(msg)
         except websockets.exceptions.ConnectionClosedError:
             self.get_logger().info('Connection closed by client')

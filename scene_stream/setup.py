@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'ws2ros = scene_stream.ws2ros:main'
+            'ws2ros = scene_stream.ws2ros:main',
+            'vslam = scene_stream.vslam:main',
         ],
     },
 )
