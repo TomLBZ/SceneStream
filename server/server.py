@@ -2,7 +2,6 @@ import asyncio
 import websockets
 import numpy as np
 import cv2
-import io
 
 async def video_stream_handler(websocket, path):
     while True:
