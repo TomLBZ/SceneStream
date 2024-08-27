@@ -1,1 +1,5 @@
 server/received_frames
+build
+install
+log
+scene_stream/test
