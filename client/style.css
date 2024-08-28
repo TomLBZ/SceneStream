@@ -1,0 +1,55 @@
+video {
+    border-color: black;
+    border-style: solid;
+}
+
+button.positive {
+    background-color: #4CAF50;
+    color: white;
+    padding: 2% 4%;
+    margin: 2% 0;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+    width: auto;
+}
+
+button.negative {
+    background-color: #f44336;
+    color: white;
+    padding: 2% 4%;
+    margin: 2% 0;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+    width: auto;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    color: black;
+    cursor: not-allowed;
+}
+
+canvas {
+    visibility: hidden;
+    display: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 2%;
+    column-gap: 2%;
+    margin: 2%;
+}
+
+.textbox {
+    width: auto;
+    height: auto;
+    margin: 0%;
+    padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
